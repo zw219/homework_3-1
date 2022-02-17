@@ -82,11 +82,11 @@ def update_candlestick_graph(n_clicks, value): # n_clicks doesn't get used, we o
 
     # First things first -- what currency pair history do you want to fetch?
     # Define it as a contract object!
-    contract = Contract()
-    contract.symbol   = # set this to the FIRST currency (before the ".")
-    contract.secType  = 'CASH'
-    contract.exchange = 'IDEALPRO' # 'IDEALPRO' is the currency exchange.
-    contract.currency = # set this to the FIRST currency (before the ".")
+    # contract = Contract()
+    # contract.symbol   = # set this to the FIRST currency (before the ".")
+    # contract.secType  = 'CASH'
+    # contract.exchange = 'IDEALPRO' # 'IDEALPRO' is the currency exchange.
+    # contract.currency = # set this to the FIRST currency (before the ".")
 
     # Wait until ibkr_app runs the query and saves the historical prices csv
     while not 'currency_pair_history.csv' in listdir():
@@ -101,7 +101,6 @@ def update_candlestick_graph(n_clicks, value): # n_clicks doesn't get used, we o
     # Don't forget -- you'll need to update the signature in this callback
     #   function to include your new vars!
     cph = req_historical_data(
-        tickerId = 1,
         contract = contract,
         endDateTime='',           # <-- make a reactive input
         durationStr='30 D',       # <-- make a reactive input
