@@ -9,4 +9,3 @@ To complete this HW:
    "req_historical_data" as indicated in Lines 106 to 110 of app.py. Don't 
    forget -- you'll need to include these new vars in the signatures of the 
    callback and the callback function!
-4) Add this HW to your server at location "your url.com/homework_3.1"

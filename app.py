@@ -25,6 +25,14 @@ app.layout = html.Div([
         ]
     ),
 
+    html.Div(
+    dcc.Dropdown(
+        ["TRADES", "MIDPOINT", "BID", "ASK", "BID_ASK", "ADJUSTED_LAST",
+         "HISTORICAL_VOLATILITY", "OPTION_IMPLIED_VOLATILITY", 'REBATE_RATE',
+         'FEE_RATE', "YIELD_BID", "YIELD_ASK", 'YIELD_BID_ASK', 'YIELD_LAST',
+         "SCHEDULE"], "MIDPOINT", id='what-to-show'),
+    ),
+
     # Currency pair text input, within its own div.
     html.Div(
         # The input object itself
@@ -72,13 +80,18 @@ app.layout = html.Div([
     Output(component_id='currency-output', component_property='children'),
     Output(component_id='candlestick-graph', component_property='figure')
     ],
-    Input('submit-button', 'n_clicks'), # The callback function will fire when the submit button's n_clicks changes
+    [Input('submit-button', 'n_clicks'), Input('what-to-show', 'value')],
+    # The callback function will
+     # fire when the submit button's n_clicks changes
     # The currency input's value is passed in as a "State" because if the user is typing and the value changes, then
     #   the callback function won't run. But the callback does run because the submit button was pressed, then the value
     #   of 'currency-input' at the time the button was pressed DOES get passed in.
     State('currency-input', 'value')
 )
-def update_candlestick_graph(n_clicks, value): # n_clicks doesn't get used, we only include it for the dependency.
+def update_candlestick_graph(n_clicks, what_to_show, value): # n_clicks doesn't
+# get used, we only include it for the dependency.
+
+    print(what_to_show)
 
     # First things first -- what currency pair history do you want to fetch?
     # Define it as a contract object!
@@ -105,7 +118,7 @@ def update_candlestick_graph(n_clicks, value): # n_clicks doesn't get used, we o
         endDateTime='',           # <-- make a reactive input
         durationStr='30 D',       # <-- make a reactive input
         barSizeSetting='1 hour',  # <-- make a reactive input
-        whatToShow='MIDPOINT',    # <-- make a reactive input
+        whatToShow=what_to_show,    # <-- make a reactive input
         useRTH=True               # <-- make a reactive input
     )
 
@@ -151,9 +164,6 @@ def trade(n_clicks, action, trade_currency, trade_amt): # Still don't use n_clic
         "trade_currency": trade_currency,
         "trade_amt": trade_amt
     }
-
-    # Dump trade_order as a pickle object to a file connection opened with write-in-binary ("wb") permission:
-    pickle.dump(trade_order, open('trade_order.p', 'wb'))
 
     # Return the message, which goes to the trade-output div's "children" attribute.
     return msg
