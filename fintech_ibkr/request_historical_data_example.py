@@ -4,6 +4,7 @@
 #  synchronous_functions.py, this script should return a dataframe that's
 #  ready to be loaded into the candlestick graph constructor.
 
+from ibapi.contract import Contract
 from fintech_ibkr import *
 
 value = "EUR.USD" # This is what your text input looks like on your app
@@ -11,12 +12,12 @@ value = "EUR.USD" # This is what your text input looks like on your app
 # Create a contract object
 contract = Contract()
 contract.symbol = value.split(".")[0]
-contract.secType = 'CASH'
+contract.secType  = 'CASH'
 contract.exchange = 'IDEALPRO'  # 'IDEALPRO' is the currency exchange.
 contract.currency = value.split(".")[1]
 
 # Get your historical data
-historical_data = req_historical_data(contract)
+historical_data = fetch_historical_data(contract)
 
 # Print it! This should be a dataframe that's ready to go.
 print(historical_data)
