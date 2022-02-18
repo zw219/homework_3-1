@@ -101,10 +101,6 @@ def update_candlestick_graph(n_clicks, what_to_show, value): # n_clicks doesn't
     # contract.exchange = 'IDEALPRO' # 'IDEALPRO' is the currency exchange.
     # contract.currency = # set this to the FIRST currency (before the ".")
 
-    # Wait until ibkr_app runs the query and saves the historical prices csv
-    while not 'currency_pair_history.csv' in listdir():
-        sleep(1)
-
     # Make the historical data request.
     # Where indicated below, you need to make a REACTIVE INPUT for each one of
     #   the required inputs for req_historical_data().
