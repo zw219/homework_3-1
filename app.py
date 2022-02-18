@@ -5,6 +5,7 @@ from dash import html
 from dash.dependencies import Input, Output, State
 from ibapi.contract import Contract
 from fintech_ibkr import *
+import pandas as pd
 
 # Make a Dash app!
 app = dash.Dash(__name__)
@@ -174,28 +175,28 @@ def update_candlestick_graph(n_clicks, currency_string, what_to_show,
     # Some default values are provided below to help with your testing.
     # Don't forget -- you'll need to update the signature in this callback
     #   function to include your new vars!
-    cph = fetch_historical_data(
-        contract=contract,
-        endDateTime='',
-        durationStr='30 D',       # <-- make a reactive input
-        barSizeSetting='1 hour',  # <-- make a reactive input
-        whatToShow=what_to_show,
-        useRTH=True               # <-- make a reactive input
-    )
-    # # Make the candlestick figure
-    fig = go.Figure(
-        data=[
-            go.Candlestick(
-                x=cph['date'],
-                open=cph['open'],
-                high=cph['high'],
-                low=cph['low'],
-                close=cph['close']
-            )
-        ]
-    )
-    # # Give the candlestick figure a title
-    fig.update_layout(title=('Exchange Rate: ' + currency_string))
+    # cph = fetch_historical_data(
+    #     contract=contract,
+    #     endDateTime='',
+    #     durationStr='30 D',       # <-- make a reactive input
+    #     barSizeSetting='1 hour',  # <-- make a reactive input
+    #     whatToShow=what_to_show,
+    #     useRTH=True               # <-- make a reactive input
+    # )
+    # # # Make the candlestick figure
+    # fig = go.Figure(
+    #     data=[
+    #         go.Candlestick(
+    #             x=cph['date'],
+    #             open=cph['open'],
+    #             high=cph['high'],
+    #             low=cph['low'],
+    #             close=cph['close']
+    #         )
+    #     ]
+    # )
+    # # # Give the candlestick figure a title
+    # fig.update_layout(title=('Exchange Rate: ' + currency_string))
     ############################################################################
     ############################################################################
 

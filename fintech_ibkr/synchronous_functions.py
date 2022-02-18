@@ -19,16 +19,15 @@ class ibkr_app(EWrapper, EClient):
         ])
         self.next_valid_id = None
         ########################################################################
-        # Here, you'll need to initialize self.historical_data as a dataframe
-        # having the column names you want to use. Clearly, you'll want to make
-        # sure your colnames match with what you tell the candlestick figure
-        # to expect when you create it in your app!
+        # Here, you'll need to change Line 30 to initialize
+        # self.historical_data as a dataframe having the column names you
+        # want to use. Clearly, you'll want to make sure your colnames match
+        # with what you tell the candlestick figure to expect when you create
+        # it in your app!
         # I've already done the same general process you need to go through
         # in the self.error_messages instance variable, so you can use that as
         # a guide.
-
-        # uncomment this next line (of course):
-        # self.historical_data =
+        self.historical_data = ''
         self.historical_data_end = ''
         self.contract_details = ''
         self.contract_details_end = ''
